@@ -1,5 +1,31 @@
-import {FC, ReactNode} from 'react'
+import {FC, FC, ReactNode} from 'react'
 import Head from 'next/head'
+import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid"
+import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid"
+import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid"
+import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid"
+import Link from "next/link"
+import Link from "next/link"
+import Link from "next/link"
+import Link from "next/link"
+import { FC } from "react"
+import { FC } from "react"
+import { FC } from "react"
+import { FC } from "react"
+import { useMutateTask } from "../hooks/useMutateTask"
+import { useMutateTask } from "../hooks/useMutateTask"
+import { useMutateTask } from "../hooks/useMutateTask"
+import { useMutateTask } from "../hooks/useMutateTask"
+import { updateTaskInput } from "../schema/todo"
+import { updateTaskInput } from "../schema/todo"
+import { updateTaskInput } from "../schema/todo"
+import { updateTaskInput } from "../schema/todo"
+import useStore from "../store"
+import useStore from "../store"
+import useStore from "../store"
+import useStore from "../store"
+import { useMutateTask } from '../hooks/useMutateTask'
+import { updateTaskInput } from '../schema/todo'
 
 type Props = {
   title: string
@@ -18,5 +44,36 @@ export const Layout: FC<Props> = ({children, title = "T3 Stack"}) => {
         {children}
       </main>
     </>
+  )
+}
+export const TaskItem: FC<updateTaskInput> = ({ taskId, title, body, }) => {
+  const update = useStore((state) => state.updateEditedTask)
+  const { deleteTaskMutation } = useMutateTask()
+  const deleteTaskMuta
+  return (
+    <li>
+      <Link href={`/task${taskId}`}>
+        <span className="cursor-pointer">{title}</span>
+      </Link>
+      <div className="float-right ml-20 flex">
+        <PencilIcon
+          className='mx-1 h-5 w-5 cursor-pointer text-blue-600'
+          onClick={() => {
+            update({
+              taskId,
+              title,
+              body,
+            })
+          } } />
+        <TrashIcon
+          className='h-5 w-5 cursor-pointer text-blue-600'
+          onClick={() => {
+            deleteTaskMutation.mutate({ taskId })
+          } } />
+      </div>
+      {deleteTaskMutation.isLoading && (
+        <p className='mb-3 text-green-500'>Mutation under process....</p>
+      )}
+    </li>
   )
 }
