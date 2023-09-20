@@ -5,14 +5,13 @@ import { ZodError } from "zod";
 
 export const t = initTRPC.context<Context>().create({
   transformer: superjson,
- errorFormatter(opts) {
-    const { shape, error } = opts;
+  errorFormatter({ shape, error }) {
     return {
       ...shape,
       data: {
         ...shape.data,
         zodError:
-          error.code === 'BAD_REQUEST' && error.cause instanceof ZodError
+          error.code === "BAD_REQUEST" && error.cause instanceof ZodError
             ? error.cause.flatten()
             : null,
       },

@@ -16,7 +16,7 @@ export const trpc = createTRPCNext<AppRouter>({
       transformer: superjson,
       queryClientConfig: {
         defaultOptions: {
-          queries: {retry: false, refetchOnWindowFocus: false},
+          queries: { retry: false, refetchOnWindowFocus: false },
         },
       },
       links: [

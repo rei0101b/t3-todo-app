@@ -1,9 +1,9 @@
 import React from 'react'
 import { trpc } from '../utils/trpc'
-import { TaskItem } from './Layout'
+import { TaskItem } from './TaskItem'
 
 export const TaskList = () => {
-  const {data, isLoading, error} = trpc.todo.getTasks
+  const {data, isLoading, error} = trpc.todo.getTasks.useQuery()
   if (isLoading) {
     return <p>Loading task list....</p>
   }
